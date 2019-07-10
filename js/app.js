@@ -28,6 +28,26 @@ readFile()
 
 //Use jQuery to make a copy of the HTML template of the photo component. For each object, fill in the duplicated template with its properties, then append the copy to the DOM.
 
+// function renderImage() {
+//   NewData.list.forEach((element) => {
+//     $('main').append($('section'));
+//     $('#photo-template').append($('h2').prepend(element.title));
+//     $('#photo-template').append($('img').prepend(element.image_url));
+//     $('#photo-template').append($('p').prepend(element.description));
+//     console.log(element.description);
+//   })
+// }
+
+function renderImage(img) {
+  NewData.list.forEach(element => {
+    const $newImage = $('#photo-template').clone();
+
+    $newImage.find('h2').text(element.name);
+    $newImage.find('img').img(element.image_url);
+    $newImage.find('p').text(element.description);
+  })
+}
+
 function renderImage() {
   NewData.list.forEach(element => {
     const $newImage = $('#photo-template').clone();
