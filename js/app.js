@@ -14,15 +14,18 @@ NewData.list = [];
 // Use AJAX, specifically $.get(), to read the provided JSON file.
 function readFile(){
   $.get('../data/page-1.json', 'json')
-    .then ( data => {
+    .then( data => {
       data.forEach(idx => {
         // Each object should become a new instance of a constructor function.
         NewData.list.push(new NewData(idx));
       });
+    })
+    .then(() => {
+      renderImage();
+      displayPage();
     });
-
 }
-readFile()
+readFile();
 
 function renderImage() {
   NewData.list.forEach(element => {
@@ -38,10 +41,10 @@ function renderImage() {
   });
 
 }
-renderImage();
 
-function displayPage (images) {
-  images.forEach( (image) => {
+function displayPage () {
+  console.log(NewData.list);
+  NewData.list.forEach((image) => {
     const $newImage = $('#photo-template').clone();
 
     $newImage.find('h2').text(image.title);
@@ -49,10 +52,8 @@ function displayPage (images) {
     $newImage.find('p').text(image.keyword);
     $newImage.find('img').attr('alt', image.description);
     $newImage.removeAttr('id');
+    console.log($newImage);
     $('main').append($newImage);
   })
 }
-displayPage();
-
-
 
